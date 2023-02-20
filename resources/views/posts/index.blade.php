@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+{{--  форма создания поста  --}}
     <div class="d-flex justify-content-center" style="margin-bottom: 100px">
         <form method="POST" action="{{ route('posts.create') }}" style="width:300px">
             @csrf
@@ -64,9 +66,28 @@
                         </button>
                         {{Form::close()}}
                     @endif
-
                 </div>
+
             </div>
         @endforeach
     </div>
+<div class="d-flex justify-content-center">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item {{ ($posts->currentPage() == 1) ? ' disabled' : '' }}">
+                <a class="page-link" href="{{ $posts->url(1) }}">Previous</a>
+            </li>
+            @for ($i = 1; $i <= $posts->lastPage(); $i++)
+                <li class="page-item {{ ($posts->currentPage() == $i) ? ' active' : '' }}">
+                    <a class="page-link" href="{{ $posts->url($i) }}">{{ $i }}</a>
+                </li>
+            @endfor
+            <li class="page-item {{ ($posts->currentPage() == $posts->lastPage()) ? ' disabled' : '' }}">
+                <a class="page-link" href="{{ $posts->url($posts->currentPage()+1) }}">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
 @endsection
