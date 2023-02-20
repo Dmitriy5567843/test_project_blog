@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index()
     {
         $list = Category::all();
-        $posts = Post::with(['user', 'category'])->paginate(5);
+        $posts = Post::with(['user', 'category'])->paginate(6);
 
         return view('posts.index', compact('posts', 'list'));
     }

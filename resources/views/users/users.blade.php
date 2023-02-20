@@ -41,5 +41,23 @@
         </div>
     </div>
     @endforeach
+
+    </div>
+    <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item {{ ($users->currentPage() == 1) ? ' disabled' : '' }}">
+                    <a class="page-link" href="{{ $users->url(1) }}">Previous</a>
+                </li>
+                @for ($i = 1; $i <= $users->lastPage(); $i++)
+                    <li class="page-item {{ ($users->currentPage() == $i) ? ' active' : '' }}">
+                        <a class="page-link" href="{{ $users->url($i) }}">{{ $i }}</a>
+                    </li>
+                @endfor
+                <li class="page-item {{ ($users->currentPage() == $users->lastPage()) ? ' disabled' : '' }}">
+                    <a class="page-link" href="{{ $users->url($users->currentPage()+1) }}">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 @endsection

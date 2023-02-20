@@ -14,7 +14,6 @@
         </form>
     </div>
     @endif
-
     <div class="d-flex justify-content-around align-content-stretch flex-wrap">
     @foreach($categories as $category)
     <div class="card text-center mx-auto mb-2" style="width: 400px;">
@@ -40,5 +39,22 @@
         </div>
     </div>
     @endforeach
+    </div>
+    <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item {{ ($categories->currentPage() == 1) ? ' disabled' : '' }}">
+                    <a class="page-link" href="{{ $categories->url(1) }}">Previous</a>
+                </li>
+                @for ($i = 1; $i <= $categories->lastPage(); $i++)
+                    <li class="page-item {{ ($categories->currentPage() == $i) ? ' active' : '' }}">
+                        <a class="page-link" href="{{ $categories->url($i) }}">{{ $i }}</a>
+                    </li>
+                @endfor
+                <li class="page-item {{ ($categories->currentPage() == $categories->lastPage()) ? ' disabled' : '' }}">
+                    <a class="page-link" href="{{ $categories->url($categories->currentPage()+1) }}">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 @endsection
